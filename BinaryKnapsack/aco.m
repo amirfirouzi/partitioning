@@ -6,6 +6,8 @@ close all;
 
 model=CreateModel();
 
+% Define function handler for Goal Function
+% Cost function is a unction of x and Returns MyCost(...)
 CostFunction=@(x) MyCost(x,model);
 
 nVar=model.n;
@@ -59,6 +61,7 @@ for it=1:MaxIt
     % Move Ants
     for k=1:nAnt
         
+        % empty current ant's Tour
         ant(k).Tour=[];
         
         for l=1:nVar
@@ -111,9 +114,9 @@ for it=1:MaxIt
     %figure(1);
     %PlotSolution(BestAnt.Tour, model);
     
-    if ((BestAnt.Sol.V1 > 4750 && BestAnt.Sol.W1 > 480) && BestAnt.Sol.IsFeasible==1) 
-        break;
-    end
+%     if ((BestAnt.Sol.V1 > 4750 && BestAnt.Sol.W1 > 480) && BestAnt.Sol.IsFeasible==1) 
+%         break;
+%     end
     
 end
 
