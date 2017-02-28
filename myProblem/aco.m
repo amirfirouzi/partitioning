@@ -10,7 +10,8 @@ model=CreateModel();
 % Cost function is a unction of x and Returns MyCost(...)
 CostFunction=@(x) MyCost(x,model);
 
-nVar=model.n;
+nTasks=model.nTasks;
+nMachines=model.nMachines;
 
 
 %% ACO Parameters
@@ -34,13 +35,12 @@ N=[0 1];
 eta=[model.w./model.v
      model.v./model.w];           % Heuristic Information
 
-tau=tau0*ones(2,nVar);      % Phromone Matrix
+tau=tau0*ones(nMachines,nTasks);      % Phromone Matrix
 
 BestCost=zeros(MaxIt,1);    % Array to Hold Best Cost Values
 
 % Empty Ant
-empty_ant.Tour=[];
-empty_ant.x=[];
+empty_ant.=[];
 empty_ant.Cost=[];
 empty_ant.Sol=[];
 
