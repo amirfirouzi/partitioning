@@ -23,24 +23,23 @@ Q=1;
 tau0=1;         % Initial Phromone
 
 alpha=1;        % Phromone Exponential Weight
-beta=0.2;       % Heuristic Exponential Weight
+beta=0;       % Heuristic Exponential Weight
 
 rho=0.15;       % Evaporation Rate
 
 
 %% Initialization
 
-N=[0 1];
-
-eta=[model.w./model.v
-     model.v./model.w];           % Heuristic Information
+% eta=[model.w./model.v
+%      model.v./model.w];           % Heuristic Information
+eta=tau0*ones(nMachines,nTasks);
 
 tau=tau0*ones(nMachines,nTasks);      % Phromone Matrix
 
 BestCost=zeros(MaxIt,1);    % Array to Hold Best Cost Values
 
 % Empty Ant
-empty_ant.=[];
+empty_ant.Tour=[];
 empty_ant.Cost=[];
 empty_ant.Sol=[];
 
@@ -62,7 +61,7 @@ for it=1:MaxIt
         % empty current ant's Tour
         ant(k).Tour=[];
         
-        for l=1:nVar
+        for l=1:nTasks
             
             %Probabilities
             P=tau(:,l).^alpha.*eta(:,l).^beta;
@@ -75,7 +74,7 @@ for it=1:MaxIt
             
         end
         
-        ant(k).x=N(ant(k).Tour);
+        ant(k).x=ant(k).Tour;
         
         % Calculate the cost
         [ant(k).Cost ant(k).Sol]=CostFunction(ant(k).x);
